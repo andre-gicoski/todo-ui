@@ -1,9 +1,9 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import React, { useEffect, useState } from "react";
 import { deleteTodo, getTodoById, getTodos, updateTodo } from "./actions";
-import { Button } from "@/components/ui/button";
 import TodoItem from "./todoItem";
 import TodoForm from "./todoform";
-import { Input } from "@/components/ui/input";
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<
@@ -65,16 +65,20 @@ const TodoList: React.FC = () => {
           }
         />
       ) : (
-        todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            id={todo.id}
-            name={todo.name}
-            description={todo.description}
-            onEdit={() => handleEdit(todo)}
-            onDelete={() => handleDelete(todo.id)}
-          />
-        ))
+      todos.length > 0 ? (
+          todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              id={todo.id}
+              name={todo.name}
+              description={todo.description}
+              onEdit={() => handleEdit(todo)}
+              onDelete={() => handleDelete(todo.id)}
+            />
+          ))
+        ) : (
+          <p>No todos available</p>
+        )
       )}
       <div className="flex items-center mt-4 space-x-2">
         <Input
@@ -89,4 +93,4 @@ const TodoList: React.FC = () => {
   );
 };
 
-export default TodoList;
+export default TodoList;
